@@ -19,13 +19,14 @@ const QuickActionButtons = ({
   const [openNutritionModal, setOpenNutritionModal] = useState(true);
 
   return (
-    <div className="w-full h-[60px] md:h-[70px] bg-background flex items-center justify-center px-4 py-2 shadow-sm border-t fixed bottom-0 left-0 right-0 z-20 backdrop-blur-sm bg-white/90">
+    <div className="w-full h-[60px] md:h-[70px] bg-background flex items-center justify-center px-4 py-2 shadow-sm border-t fixed bottom-0 left-0 right-0 z-20 backdrop-blur-sm bg-white/90 dark:bg-gray-900/90 dark:border-gray-800 transition-colors duration-300">
       <div className="max-w-4xl w-full flex items-center justify-between gap-2 md:gap-4">
         <Dialog open={openMealModal} onOpenChange={setOpenMealModal}>
           <DialogTrigger asChild>
             <Button
               onClick={onLogMeal}
-              className="flex-1 gap-1 md:gap-2 text-xs md:text-sm bg-green-500 hover:bg-green-600 text-white px-2 md:px-4 hover-scale"
+              variant="hero"
+              className="flex-1 gap-1 md:gap-2 text-xs md:text-sm bg-gradient-to-r from-green-500 to-green-600 text-white px-2 md:px-4"
             >
               <UtensilsCrossed className="h-4 w-4 md:h-5 md:w-5" />
               <span className="hidden xs:inline">Log Meal</span>
@@ -44,7 +45,8 @@ const QuickActionButtons = ({
           <DialogTrigger asChild>
             <Button
               onClick={onLogWater}
-              className="flex-1 gap-1 md:gap-2 text-xs md:text-sm bg-blue-500 hover:bg-blue-600 text-white px-2 md:px-4 hover-scale"
+              variant="hero"
+              className="flex-1 gap-1 md:gap-2 text-xs md:text-sm bg-gradient-to-r from-blue-500 to-blue-600 text-white px-2 md:px-4"
             >
               <Droplets className="h-4 w-4 md:h-5 md:w-5" />
               <span className="hidden xs:inline">Log Water</span>
@@ -65,7 +67,8 @@ const QuickActionButtons = ({
           <DialogTrigger asChild>
             <Button
               onClick={onViewNutrition}
-              className="flex-1 gap-1 md:gap-2 text-xs md:text-sm bg-purple-500 hover:bg-purple-600 text-white px-2 md:px-4 hover-scale"
+              variant="hero"
+              className="flex-1 gap-1 md:gap-2 text-xs md:text-sm bg-gradient-to-r from-purple-500 to-purple-600 text-white px-2 md:px-4"
             >
               <PieChart className="h-4 w-4 md:h-5 md:w-5" />
               <span className="hidden xs:inline">Nutrition Details</span>
@@ -83,8 +86,8 @@ const QuickActionButtons = ({
         </Dialog>
 
         <Button
-          variant="outline"
-          className="rounded-full h-10 w-10 md:h-12 md:w-12 p-0 flex items-center justify-center flex-shrink-0 animate-pulse"
+          variant="hero"
+          className="rounded-full h-10 w-10 md:h-12 md:w-12 p-0 flex items-center justify-center flex-shrink-0 animate-pulse bg-gradient-to-r from-primary to-primary/80"
         >
           <Plus className="h-5 w-5 md:h-6 md:w-6" />
         </Button>

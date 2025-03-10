@@ -25,6 +25,7 @@ import {
 import { useAuth } from "@/context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { saveUserActivity } from "@/lib/db";
+import ThemeToggle from "@/components/ThemeToggle";
 
 interface HeaderProps {
   userName?: string;
@@ -78,7 +79,7 @@ const Header = ({
   };
 
   return (
-    <header className="w-full h-16 md:h-20 px-4 md:px-6 lg:px-8 bg-background border-b border-border flex items-center justify-between sticky top-0 z-20 backdrop-blur-sm bg-white/90">
+    <header className="w-full h-16 md:h-20 px-4 md:px-6 lg:px-8 bg-background border-b border-border flex items-center justify-between sticky top-0 z-20 backdrop-blur-sm bg-white/90 dark:bg-gray-900/90 dark:border-gray-800 transition-colors duration-300">
       <div className="flex items-center">
         <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
           <SheetTrigger asChild>
@@ -208,6 +209,7 @@ const Header = ({
       </div>
 
       <div className="flex items-center gap-2 md:gap-3">
+        <ThemeToggle />
         <div className="relative hidden md:block">
           <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
           <input
