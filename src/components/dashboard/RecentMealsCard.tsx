@@ -11,6 +11,7 @@ interface MealItem {
   calories: number;
   imageUrl?: string;
   category: "breakfast" | "lunch" | "dinner" | "snack";
+  capturedImageUrl?: string;
 }
 
 interface RecentMealsCardProps {
@@ -66,19 +67,25 @@ const RecentMealsCard = ({
   };
 
   return (
-    <Card className="w-full h-full bg-white overflow-hidden">
+    <Card className="w-full h-full min-h-[200px] bg-white overflow-hidden hover:shadow-md transition-all duration-300">
       <CardHeader className="pb-2">
         <CardTitle className="text-lg font-bold">{title}</CardTitle>
       </CardHeader>
       <CardContent className="p-4">
-        <div className="space-y-4 max-h-[240px] overflow-y-auto pr-2">
+        <div className="space-y-4 max-h-[240px] h-[240px] overflow-y-auto pr-2 -mx-2 px-2">
           {meals.map((meal) => (
             <div
               key={meal.id}
-              className="flex items-center space-x-4 p-2 rounded-lg hover:bg-gray-50 transition-colors"
+              className="flex items-center space-x-4 p-2 rounded-lg hover:bg-gray-50 transition-colors flex-wrap sm:flex-nowrap gap-y-2"
             >
               <Avatar className="h-12 w-12 rounded-md">
-                {meal.imageUrl ? (
+                {meal.capturedImageUrl ? (
+                  <AvatarImage
+                    src={meal.capturedImageUrl}
+                    alt={meal.name}
+                    className="object-cover"
+                  />
+                ) : meal.imageUrl ? (
                   <AvatarImage src={meal.imageUrl} alt={meal.name} />
                 ) : (
                   <AvatarFallback className="rounded-md bg-primary/10">
@@ -86,7 +93,7 @@ const RecentMealsCard = ({
                   </AvatarFallback>
                 )}
               </Avatar>
-              <div className="flex-1 min-w-0">
+              <div className="flex-1 min-w-0 w-full sm:w-auto">
                 <p className="text-sm font-medium text-gray-900 truncate">
                   {meal.name}
                 </p>
@@ -95,7 +102,7 @@ const RecentMealsCard = ({
                   <span>{meal.time}</span>
                 </div>
               </div>
-              <div className="flex flex-col items-end space-y-1">
+              <div className="flex flex-col items-end space-y-1 ml-auto sm:ml-0">
                 <span className="text-sm font-semibold">
                   {meal.calories} cal
                 </span>

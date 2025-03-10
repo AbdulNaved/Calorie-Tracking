@@ -78,7 +78,7 @@ const Header = ({
   };
 
   return (
-    <header className="w-full h-16 md:h-20 px-4 md:px-6 lg:px-8 bg-background border-b border-border flex items-center justify-between sticky top-0 z-10">
+    <header className="w-full h-16 md:h-20 px-4 md:px-6 lg:px-8 bg-background border-b border-border flex items-center justify-between sticky top-0 z-20 backdrop-blur-sm bg-white/90">
       <div className="flex items-center">
         <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
           <SheetTrigger asChild>

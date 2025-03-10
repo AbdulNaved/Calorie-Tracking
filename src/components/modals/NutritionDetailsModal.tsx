@@ -13,6 +13,55 @@ const NutritionDetailsModal = ({
   open = true,
   onOpenChange = () => {},
 }: NutritionDetailsModalProps) => {
+  // Show motivational notification when modal opens
+  React.useEffect(() => {
+    if (open) {
+      const motivationalMessages = [
+        "Great job tracking your nutrition! You're on your way to a healthier you.",
+        "Remember, consistency is key to reaching your health goals!",
+        "Small changes in your diet can lead to big results over time.",
+        "You're making informed choices about your nutrition - that's something to be proud of!",
+      ];
+
+      const randomMessage =
+        motivationalMessages[
+          Math.floor(Math.random() * motivationalMessages.length)
+        ];
+
+      // Add a slight delay for better UX
+      const timer = setTimeout(() => {
+        const toast = document.createElement("div");
+        toast.className =
+          "fixed bottom-4 right-4 bg-green-50 border border-green-200 text-green-800 p-4 rounded-lg shadow-lg z-50 animate-fadeIn";
+        toast.innerHTML = `
+          <div class="flex items-start gap-3">
+            <div class="text-green-500 mt-0.5">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path><path d="m9 12 2 2 4-4"></path></svg>
+            </div>
+            <div>
+              <p class="font-medium mb-1">Nutrition Insight</p>
+              <p class="text-sm">${randomMessage}</p>
+            </div>
+          </div>
+        `;
+        document.body.appendChild(toast);
+
+        // Add animation
+        setTimeout(() => {
+          toast.classList.add("animate-bounce");
+          setTimeout(() => toast.classList.remove("animate-bounce"), 1000);
+        }, 500);
+
+        // Remove after 5 seconds
+        setTimeout(() => {
+          toast.classList.add("animate-fadeOut");
+          setTimeout(() => toast.remove(), 500);
+        }, 5000);
+      }, 1000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [open]);
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="bg-white w-full max-w-4xl max-h-[90vh] overflow-y-auto">

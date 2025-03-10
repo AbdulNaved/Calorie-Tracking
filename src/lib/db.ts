@@ -7,7 +7,11 @@ export type ActivityType =
   | "goal_set"
   | "login"
   | "signup"
-  | "task_completed";
+  | "task_completed"
+  | "streak_updated"
+  | "streak_milestone"
+  | "streak_freeze_used"
+  | "streak_reset";
 
 export interface UserActivity {
   id?: string;
@@ -27,6 +31,7 @@ export interface MealLogData {
     fat: number;
   }>;
   totalCalories: number;
+  imageUrl?: string | null;
 }
 
 export interface WaterLogData {
@@ -55,6 +60,7 @@ export const saveUserActivity = async (activity: UserActivity) => {
     // Add timestamp if not provided
     const activityWithTimestamp = {
       ...activity,
+      id: `activity-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`,
       created_at: activity.created_at || new Date().toISOString(),
     };
 
@@ -74,6 +80,13 @@ export const saveUserActivity = async (activity: UserActivity) => {
     if (error) throw error;
     return data;
     */
+
+    // Show a console message to help with debugging
+    console.log("Activity saved successfully!", activityWithTimestamp);
+    console.log("All activities:", [
+      ...existingActivities,
+      activityWithTimestamp,
+    ]);
 
     return activityWithTimestamp;
   } catch (error) {

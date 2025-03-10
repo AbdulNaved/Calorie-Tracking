@@ -83,6 +83,11 @@ const GoalsSettingModal = ({
 }: GoalsSettingModalProps) => {
   const [isOpen, setIsOpen] = useState(open);
 
+  // Update isOpen when open prop changes
+  React.useEffect(() => {
+    setIsOpen(open);
+  }, [open]);
+
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: defaultValues as FormValues,
@@ -100,12 +105,15 @@ const GoalsSettingModal = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={handleOpenChange}>
-      <DialogTrigger asChild>
-        <Button variant="outline" className="bg-white">
-          <Cog className="mr-2 h-4 w-4" />
-          Set Goals
-        </Button>
-      </DialogTrigger>
+      {/* Only render DialogTrigger if not controlled externally */}
+      {!onOpenChange && (
+        <DialogTrigger asChild>
+          <Button variant="outline" className="bg-white hover-lift">
+            <Cog className="mr-2 h-4 w-4" />
+            Set Goals
+          </Button>
+        </DialogTrigger>
+      )}
       <DialogContent className="sm:max-w-[500px] bg-white">
         <DialogHeader>
           <DialogTitle className="flex items-center">

@@ -24,6 +24,7 @@ const motivationalMessages = [
   "Missing some entries today? No problem - let's get back on track!",
 ];
 
+// Custom hook for showing motivational notifications
 export const useMotivationalNotification = () => {
   const { toast } = useToast();
 
@@ -50,16 +51,17 @@ export const useMotivationalNotification = () => {
           Log Now
         </ToastAction>
       ),
-      icon: <CheckCircle2 className="h-5 w-5 text-green-500" />,
     });
   };
 
   return { showMotivationalNotification };
 };
 
-export const MotivationalNotification: React.FC<
-  MotivationalNotificationProps
-> = ({ message, action }) => {
+// Component for displaying a motivational notification
+const MotivationalNotification = ({
+  message,
+  action,
+}: MotivationalNotificationProps) => {
   return (
     <Toast>
       <div className="flex items-start gap-2">

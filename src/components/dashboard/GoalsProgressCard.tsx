@@ -55,7 +55,7 @@ const GoalsProgressCard: React.FC<GoalsProgressCardProps> = ({
   );
 
   return (
-    <Card className="w-full h-full bg-white shadow-md">
+    <Card className="w-full h-full min-h-[200px] bg-white shadow-sm hover:shadow-md transition-all duration-300">
       <CardHeader>
         <CardTitle className="text-lg font-bold flex items-center justify-between">
           <span>Goals Progress</span>
@@ -72,7 +72,11 @@ const GoalsProgressCard: React.FC<GoalsProgressCardProps> = ({
               {calorieGoal.current} / {calorieGoal.target} kcal
             </span>
           </div>
-          <Progress value={caloriePercentage} className="h-2" />
+          <Progress
+            value={caloriePercentage}
+            className="h-2 animate-fade-in"
+            style={{ transition: "width 1s ease-in-out" }}
+          />
         </div>
 
         <div className="space-y-3 pt-2">
@@ -86,10 +90,13 @@ const GoalsProgressCard: React.FC<GoalsProgressCardProps> = ({
                     {goal.current} / {goal.target} {goal.unit}
                   </span>
                 </div>
-                <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+                <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden animate-fade-in stagger-1">
                   <div
                     className={`${goal.color} h-full rounded-full`}
-                    style={{ width: `${percentage}%` }}
+                    style={{
+                      width: `${percentage}%`,
+                      transition: "width 1s ease-in-out",
+                    }}
                   ></div>
                 </div>
               </div>

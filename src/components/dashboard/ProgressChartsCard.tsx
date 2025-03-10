@@ -43,7 +43,7 @@ const ProgressChartsCard: React.FC<ProgressChartsCardProps> = ({
   },
 }) => {
   return (
-    <Card className="w-full max-w-[750px] h-[400px] bg-white">
+    <Card className="w-full h-[400px] min-h-[400px] bg-white hover:shadow-md transition-all duration-300">
       <CardHeader className="pb-2">
         <div className="flex justify-between items-center">
           <CardTitle className="text-xl font-bold">Progress Charts</CardTitle>
@@ -70,10 +70,10 @@ const ProgressChartsCard: React.FC<ProgressChartsCardProps> = ({
             </TabsTrigger>
           </TabsList>
 
-          <TabsContent value="daily" className="h-[280px]">
+          <TabsContent value="daily" className="h-[280px] min-h-[280px]">
             <div className="flex flex-col h-full">
               <div className="flex justify-between mb-2">
-                <div className="flex space-x-4">
+                <div className="flex flex-wrap gap-2 md:gap-4">
                   <span className="flex items-center text-xs">
                     <div className="w-3 h-3 rounded-full bg-blue-500 mr-1"></div>
                     Calories
@@ -140,10 +140,10 @@ const ProgressChartsCard: React.FC<ProgressChartsCardProps> = ({
             </div>
           </TabsContent>
 
-          <TabsContent value="weekly" className="h-[280px]">
+          <TabsContent value="weekly" className="h-[280px] min-h-[280px]">
             <div className="flex flex-col h-full">
               <div className="flex justify-between mb-2">
-                <div className="flex space-x-4">
+                <div className="flex flex-wrap gap-2 md:gap-4">
                   <span className="flex items-center text-xs">
                     <div className="w-3 h-3 rounded-full bg-purple-500 mr-1"></div>
                     Avg. Calories
@@ -160,7 +160,7 @@ const ProgressChartsCard: React.FC<ProgressChartsCardProps> = ({
                 </select>
               </div>
 
-              <div className="grid grid-cols-2 gap-4 flex-1">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-1">
                 {/* Bar chart placeholder */}
                 <div className="bg-gray-50 rounded-lg p-4 flex items-center justify-center relative">
                   <div className="absolute inset-0 p-6">

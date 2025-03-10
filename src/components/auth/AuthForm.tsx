@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { supabase } from "@/lib/supabase";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { saveUserActivity } from "@/lib/db";
+import { useToast } from "@/components/ui/use-toast";
 
 import {
   Form,
@@ -46,6 +47,7 @@ const AuthForm = () => {
   const [error, setError] = useState<string | null>(null);
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+  const { toast } = useToast();
 
   const loginForm = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
@@ -88,6 +90,13 @@ const AuthForm = () => {
           user_id: mockUser.id,
           activity_type: "login",
           details: { email: values.email },
+        });
+
+        // Show success notification
+        toast({
+          title: "Login Successful",
+          description: "Welcome back to NutriTrack!",
+          variant: "default",
         });
 
         // Mock successful login
@@ -137,6 +146,14 @@ const AuthForm = () => {
         details: { email: values.email, name: values.name },
       });
 
+      // Show success notification
+      toast({
+        title: "Account Created",
+        description:
+          "Welcome to NutriTrack! Your account has been created successfully.",
+        variant: "default",
+      });
+
       // Mock successful signup and login
       navigate("/");
       return;
@@ -175,10 +192,10 @@ const AuthForm = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-50 px-4 py-8">
-      <Card className="w-full max-w-md bg-white shadow-lg">
+      <Card className="w-full max-w-md bg-white shadow-lg animate-fade-in">
         <CardHeader className="space-y-1 text-center">
           <div className="flex justify-center mb-2">
-            <div className="bg-primary rounded-full p-2">
+            <div className="bg-primary rounded-full p-2 animate-scale-in">
               <img
                 src="/vite.svg"
                 alt="Logo"
@@ -267,7 +284,11 @@ const AuthForm = () => {
                     </div>
                   )}
 
-                  <Button type="submit" className="w-full" disabled={loading}>
+                  <Button
+                    type="submit"
+                    className="w-full hover-lift"
+                    disabled={loading}
+                  >
                     {loading ? (
                       <>
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -378,7 +399,11 @@ const AuthForm = () => {
                     </div>
                   )}
 
-                  <Button type="submit" className="w-full" disabled={loading}>
+                  <Button
+                    type="submit"
+                    className="w-full hover-lift"
+                    disabled={loading}
+                  >
                     {loading ? (
                       <>
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
